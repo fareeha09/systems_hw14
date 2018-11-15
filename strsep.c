@@ -1,24 +1,23 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
-char ** parse_args (char * line){
-  char * arr[5];
-  char *s = strsep(&line, " ");
-  printf( "flgjffffsd\n");
+char ** parse_args(char * line){
+  char * s;
+  char ** arr;
   int i = 0;
-  
-  while (s){
+  while ((s = strsep(&line," "))){
+    printf("TEST\n");
     arr[i] = s;
     i++;
-    s = strsep(&line, " ");
   }
-
+  arr[i+1] = NULL;
   return arr;
 }
 
 int main(){
-  char c[100] = "ls -a -l";
-  parse_args(c);
+  char cow[10] = "ls -a -l";
+  char ** args = parse_args(cow);
+  //execvp(args[0], args);
 }
