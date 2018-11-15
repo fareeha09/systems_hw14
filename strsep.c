@@ -5,10 +5,9 @@
 
 char ** parse_args(char * line){
   char * s;
-  char ** arr;
+  char ** arr = calloc(30,sizeof(char*));
   int i = 0;
   while ((s = strsep(&line," "))){
-    printf("TEST\n");
     arr[i] = s;
     i++;
   }
@@ -18,6 +17,14 @@ char ** parse_args(char * line){
 
 int main(){
   char cow[10] = "ls -a -l";
+  printf("Arguments of: %s\n",cow);
   char ** args = parse_args(cow);
-  //execvp(args[0], args);
+    
+  int i = 0;
+  while(args[i]){
+    printf("Arg %d: %s\n",i,args[i]);
+    i++;
+  }
+  printf("\n\nExecuting ls -a -l\n");
+  execvp(args[0], args);
 }
